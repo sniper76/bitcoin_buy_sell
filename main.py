@@ -9,6 +9,7 @@ from buy import buy_btc
 from sell import sell_btc
 from sell_market_price import sell_market_btc
 from buy_market_price import buy_market_btc
+from price_util import cutting_unit_price
 
 def main():
     try:
@@ -25,9 +26,9 @@ def main():
             response = get_balance_and_locked_and_fee()
             data = json.loads(response)  # JSON 문자열을 딕셔너리로 변환
 
-            buy_signal = get_bar_chart_data()
+            bar_char_data = get_bar_chart_data()
 
-            if data["bid_balance"] > 9990 and data["bid_locked"] == 0 and data["ask_balance"] == 0 and data["ask_locked"] == 0 and buy_signal:
+            if data["bid_balance"] > 9990 and data["bid_locked"] == 0 and data["ask_balance"] == 0 and data["ask_locked"] == 0 and bool(bar_char_data["buy_signal"]):
                 print("매수 프로세스 시작!!")
 
                 # 매수가 계산: 잔액 - (수수료 * 2)
@@ -36,7 +37,12 @@ def main():
                 total_balance = balance - (balance * fee_rate * 2)
 
                 # 현재가 조회 (단일 티커)
-                current_price = python_bithumb.get_current_price("KRW-BTC")
+                #current_price = python_bithumb.get_current_price("KRW-BTC")
+                before_close_price = float(bar_char_data["before_close_price"])
+
+                # 매수가 + 0.005%
+                current_price = float(before_close_price + (before_close_price * 0.00005))
+                current_price = cutting_unit_price(1000, current_price)
 
                 # 수량 계산
                 quantity = round(total_balance / current_price, 7)

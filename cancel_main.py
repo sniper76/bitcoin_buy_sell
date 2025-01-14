@@ -12,6 +12,9 @@ from sell_market_price import sell_market_btc
 def main():
     try:
         while True:
+            # 2분 대기
+            time.sleep(120)
+
             result = find_last_row_uuid_and_state('/Users/sniper76/VScodeProjects/result.txt')
             if result is None:
                 continue
@@ -28,9 +31,6 @@ def main():
                 time.sleep(2)
                 #현재 시장가로 바로 매도 주문 처리
                 sell_market_btc(float(cancel_result["remaining_volume"]))
-
-            # 2분 대기
-            time.sleep(120)
 
     except KeyboardInterrupt:
         print("프로그램이 종료되었습니다.")
