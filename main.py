@@ -7,6 +7,7 @@ from order_chance import get_balance_and_locked_and_fee
 from bar_chart import get_bar_chart_data
 from buy import buy_btc
 from sell import sell_btc
+from sell_market_price import sell_market_btc
 
 def main():
     try:
@@ -43,6 +44,8 @@ def main():
                 if buy_result["is_completed"]:
                     #print("Executing sell operation...")
                     sell_result = sell_btc(current_price, quantity)
+
+                    #sell_result = sell_market_btc(quantity) 시장가로 매도 해도 될까?
                     sell_uuid = sell_result["uuid"]
                     print(f"Sell completed UUID: {sell_uuid}")
 

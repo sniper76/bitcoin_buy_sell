@@ -12,7 +12,7 @@ bithumb = python_bithumb.Bithumb(access_key, secret_key)
 def sell_market_btc(quantity=float):
     try:
         order_info = bithumb.sell_market_order("KRW-BTC", quantity)
-        print(f"시장가 주문 취소: {quantity} {order_info}")
+        print(f"시장가 주문 매도: {quantity} {order_info}")
 
         # 로그 파일 설정
         #with open("/Users/sniper76/VScodeProjects/result.txt", 'a') as the_file:

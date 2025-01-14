@@ -22,6 +22,7 @@ def main():
             if result['side'] == 'ask' and is_time_exceeded(result['created_at']) and data["ask_locked"] > 0:
                 cancel_result = sell_cancel(result['uuid'])
 
+                time.sleep(2)
                 #현재 시장가로 바로 매도 주문 처리
                 sell_market_btc(float(cancel_result["remaining_volume"]))
 
