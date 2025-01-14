@@ -13,6 +13,9 @@ def main():
     try:
         while True:
             result = find_last_row_uuid_and_state('/Users/sniper76/VScodeProjects/result.txt')
+            if result is None:
+                continue
+
             #print(result)
 
             # 잔액과 수수료 가져오기

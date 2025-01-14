@@ -23,8 +23,8 @@ def sell_btc(current_price=int, quantity=float):
         # 매도 잔고가 있고 매도 주문이 없으면서 매수 주문도 없는 상태만 매도 한다.
         if data["ask_balance"] > 0 and data["ask_locked"] == 0 and data["bid_locked"] == 0:
 
-            # 매도가 현재가 + 0.05%
-            sell_price = float(current_price + (current_price * 0.0005))
+            # 매도가 현재가 + 0.03%
+            sell_price = float(current_price + (current_price * 0.0003))
             final_sell_price = (int(sell_price) // 1000) * 1000
         
             print(f"매도 가격: {current_price} {final_sell_price}, {quantity}")

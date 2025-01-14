@@ -8,6 +8,7 @@ from bar_chart import get_bar_chart_data
 from buy import buy_btc
 from sell import sell_btc
 from sell_market_price import sell_market_btc
+from buy_market_price import buy_market_btc
 
 def main():
     try:
@@ -40,6 +41,7 @@ def main():
                 # 수량 계산
                 quantity = round(total_balance / current_price, 7)
                 buy_result = buy_btc(current_price, quantity)
+                #buy_market_btc(current_price) 시장가 매수로 가능한가???
 
                 if buy_result["is_completed"]:
                     #print("Executing sell operation...")
