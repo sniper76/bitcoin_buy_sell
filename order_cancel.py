@@ -9,7 +9,7 @@ secret_key = os.getenv("BITHUMB_SECRET_KEY")
 
 bithumb = python_bithumb.Bithumb(access_key, secret_key)
 
-def sell_cancel(uuid:str):
+def cancel_order(uuid:str):
     # 주문 취소 (UUID 필요)
     try:
         cancel_result = bithumb.cancel_order(uuid)

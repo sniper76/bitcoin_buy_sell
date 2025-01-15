@@ -25,8 +25,8 @@ def sell_btc(current_price=int, quantity=float):
         if data["ask_balance"] > 0 and data["ask_locked"] == 0 and data["bid_locked"] == 0:
 
             # 매도가 현재가 * 0.01 is 1%
-            sell_price = float(current_price + (current_price * 0.0002))
-            final_sell_price = cutting_unit_price(1000, sell_price)
+            #sell_price = float(current_price + (current_price * 0.0002))
+            final_sell_price = cutting_unit_price(1000, current_price)
         
             print(f"매도 가격: {current_price} {final_sell_price}, {quantity}")
 
