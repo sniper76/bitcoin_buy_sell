@@ -1,5 +1,4 @@
 .git/
 __pycache__/
+logs/
 .env
-result.csv
-result.txt
