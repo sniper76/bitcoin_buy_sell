@@ -16,6 +16,7 @@ secret_key = os.getenv("BITHUMB_SECRET_KEY")
 bithumb = python_bithumb.Bithumb(access_key, secret_key)
 
 def sell_btc(current_price=int, quantity=float):
+    obj = PrintLogger("sell.py")
     # Simulate a sell operation
     try:
         # 잔액과 수수료 가져오기
@@ -29,7 +30,7 @@ def sell_btc(current_price=int, quantity=float):
             #sell_price = float(current_price + (current_price * 0.0002))
             final_sell_price = cutting_unit_price(1000, current_price)
         
-            PrintLogger.info_method(f"매도 가격: {current_price} {final_sell_price}, {quantity}")
+            obj.info_method(f"매도 가격: {current_price} {final_sell_price}, {quantity}")
 
             order_info = bithumb.sell_limit_order("KRW-BTC", final_sell_price, quantity)
 
@@ -40,4 +41,4 @@ def sell_btc(current_price=int, quantity=float):
             return order_info
 
     except requests.exceptions.HTTPError as e:
-        print(e.response.text)  # 에러 응답 내용 확인
+        obj.debug_method(e.response.text)  # 에러 응답 내용 확인

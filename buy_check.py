@@ -6,8 +6,8 @@ from order_cancel import cancel_order
 from log_appendar import PrintLogger
 
 def buy_state_check(uuid):
+    obj = PrintLogger("buy_check.py")
     try:
-        obj = PrintLogger("buy_check.py")
         #print(f"Checking buy status for UUID: {uuid}")
         loop = 0
         while True:
@@ -34,7 +34,7 @@ def buy_state_check(uuid):
             
             time.sleep(10)
     except requests.exceptions.HTTPError as e:
-        print(e.response.text)  # 에러 응답 내용 확인
+        obj.info_method(e.response.text)  # 에러 응답 내용 확인
 # Example usage
 #if __name__ == "__main__":
 #    print(buy_state_check('C0101000002070778601'))
