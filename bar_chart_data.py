@@ -116,7 +116,8 @@ class BarChartData:
         total_fee = round(sell_fee + buy_fee)
 
         # 50100 - 50000 = 100 fee 20
-        self.example_logger.info_method(f"volatility_rate: {last_second_row_volatility_rate}, buy_price: {last_second_row_close_price}, sell_price: {last_row_close_price}, difference_price: {difference_price}, total_fee: {total_fee}")
+        self.example_logger.info_method(f"volatility_rate: {last_second_row_volatility_rate}, buy_price: {last_second_row_close_price}, sell_price: {last_row_close_price}, total_fee: {total_fee}")
+        self.example_logger.info_method(f"last_second_row_diff_price: {last_second_row_diff_price}, last_row_diff_price: {last_row_diff_price}, difference_price: {difference_price}")
         """
         바로 이전 변동율이 0.05 보다 크고
         현재 row 보다 바로 이전 row 의 종가가 작고
