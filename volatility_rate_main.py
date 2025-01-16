@@ -33,7 +33,7 @@ def main():
             response = get_balance_and_locked_and_fee()
             data = json.loads(response)  # JSON 문자열을 딕셔너리로 변환
 
-            bar_char_data = barChart.get_price_difference_volatility_calculate_with_fee_by_minute3()
+            bar_char_data = barChart.get_price_difference_volatility_calculate_with_fee_by_minute1()
 
             if data["bid_balance"] > 9990 and data["bid_locked"] == 0 and data["ask_balance"] == 0 and data["ask_locked"] == 0 and bar_char_data["buy_signal"]:
                 obj.info_method("매수 프로세스 시작!!")
@@ -55,8 +55,8 @@ def main():
                 if buy_result["is_completed"]:
                     sell_result = sell_btc(sell_price, quantity)
 
-            # 90초 대기
-            time.sleep(90)
+            # 60초 대기
+            time.sleep(60)
 
         obj.info_method("매수 배치 작업 종료")
     except KeyboardInterrupt:

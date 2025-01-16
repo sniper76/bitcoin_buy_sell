@@ -1,18 +1,25 @@
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
 # Configure the logger
 logger = logging.getLogger("CustomLogger")
 logger.setLevel(logging.DEBUG)  # Set base level to DEBUG to capture all logs
 
 # Create handlers for info and debug logs
-info_handler = logging.FileHandler("logs/info.log")
+info_handler = TimedRotatingFileHandler(
+    "logs/info.log", when="midnight", interval=1, backupCount=7, encoding="utf-8"
+)
+#info_handler = logging.FileHandler("logs/info.log")
 info_handler.setLevel(logging.INFO)  # Logs INFO and above
 
-debug_handler = logging.FileHandler("logs/debug.log")
+debug_handler = TimedRotatingFileHandler(
+    "logs/debug.log", when="midnight", interval=1, backupCount=7, encoding="utf-8"
+)
+#debug_handler = logging.FileHandler("logs/debug.log")
 debug_handler.setLevel(logging.DEBUG)  # Logs DEBUG and above
 
 # Create a formatter
-formatter = logging.Formatter('%(asctime)s %(levelname)s:%(message)s', datefmt='%Y/%m/%d %I:%M:%S %p')
+formatter = logging.Formatter('%(asctime)s %(levelname)s:%(message)s', datefmt='%Y/%m/%d %H:%M:%S')
 
 # Attach the formatter to the handlers
 info_handler.setFormatter(formatter)
@@ -34,7 +41,7 @@ class PrintLogger:
         Args:
             message (str): The debug message to log.
         """
-        self.logger.debug(f"in {self.name}: {message}")
+        self.logger.debug(f"{self.name}: {message}")
 
     def info_method(self, message):
         """
@@ -43,7 +50,7 @@ class PrintLogger:
         Args:
             message (str): The info message to log.
         """
-        self.logger.info(f"in {self.name}: {message}")
+        self.logger.info(f"{self.name}: {message}")
 
 
 # Example usage
