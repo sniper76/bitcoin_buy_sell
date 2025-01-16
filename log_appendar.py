@@ -30,8 +30,7 @@ logger.addHandler(info_handler)
 logger.addHandler(debug_handler)
 
 class PrintLogger:
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
         self.logger = logger
 
     def debug_method(self, message):
@@ -41,7 +40,7 @@ class PrintLogger:
         Args:
             message (str): The debug message to log.
         """
-        self.logger.debug(f"{self.name}: {message}")
+        self.logger.debug(f"{message}")
 
     def info_method(self, message):
         """
@@ -50,11 +49,11 @@ class PrintLogger:
         Args:
             message (str): The info message to log.
         """
-        self.logger.info(f"{self.name}: {message}")
+        self.logger.info(f"{message}")
 
 
 # Example usage
 if __name__ == "__main__":
-    obj = PrintLogger("TestObject")
+    obj = PrintLogger()
     obj.debug_method("This is a debug message.")
     obj.info_method("This is an info message.")

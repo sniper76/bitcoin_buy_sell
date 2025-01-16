@@ -11,7 +11,7 @@ secret_key = os.getenv("BITHUMB_SECRET_KEY")
 bithumb = python_bithumb.Bithumb(access_key, secret_key)
 
 def cancel_order(uuid:str):
-    obj = PrintLogger("order_cancel.py")
+    obj = PrintLogger()
     # 주문 취소 (UUID 필요)
     try:
         cancel_result = bithumb.cancel_order(uuid)

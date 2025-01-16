@@ -6,7 +6,7 @@ from order_cancel import cancel_order
 from log_appendar import PrintLogger
 
 def buy_state_check(uuid):
-    obj = PrintLogger("buy_check.py")
+    obj = PrintLogger()
     try:
         #print(f"Checking buy status for UUID: {uuid}")
         loop = 0

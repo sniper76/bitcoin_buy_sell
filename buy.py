@@ -17,7 +17,7 @@ bithumb = python_bithumb.Bithumb(access_key, secret_key)
 def buy_btc(price=int, quantity=float):
     # 지정가 매수 주문 (예: KRW-BTC를 139,000,000원에 0.0001 BTC 매수)
     try:
-        obj = PrintLogger("buy.py")
+        obj = PrintLogger()
         obj.info_method(f"매수 가격: {price}, {quantity}")
         order_info = bithumb.buy_limit_order("KRW-BTC", price, quantity)
 

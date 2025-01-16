@@ -7,7 +7,7 @@ class BarChartData:
     
     def __init__(self):
         # Use PrintLogger for logging
-        self.example_logger = PrintLogger("BarChartData")
+        self.example_logger = PrintLogger()
 
     def get_price_difference_volatility_calculate_with_fee_by_minute3(self):
         """

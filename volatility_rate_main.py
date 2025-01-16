@@ -21,7 +21,7 @@ def main():
         바로 직전 1분봉의 변동비율이 0.05 보다 클때 종가로 매수한다.
 
         """
-        obj = PrintLogger("volatility_rate_main.py")
+        obj = PrintLogger()
         barChart = BarChartData()
         obj.info_method("매수 배치 작업 시작")
         start_time = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)

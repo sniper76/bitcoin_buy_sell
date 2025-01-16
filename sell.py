@@ -16,7 +16,7 @@ secret_key = os.getenv("BITHUMB_SECRET_KEY")
 bithumb = python_bithumb.Bithumb(access_key, secret_key)
 
 def sell_btc(current_price=int, quantity=float):
-    obj = PrintLogger("sell.py")
+    obj = PrintLogger()
     # Simulate a sell operation
     try:
         # 잔액과 수수료 가져오기
