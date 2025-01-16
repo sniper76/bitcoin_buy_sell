@@ -34,8 +34,17 @@ def get_volatility_rate_bar_chart_data():
     #print(df.dtypes)
     
     #print(df[["open", "low", "high", "close", "volatility", "volatility_rate", "diff_1", "buy_signal"]])
-    print(f"last_second_row_volatility_rate: {last_second_row_volatility_rate}, last_second_row_close_price: {last_second_row_close_price}, last_row_close_price: {last_row_close_price}")
-    if last_second_row_volatility_rate > 0.05 and last_second_row_close_price < last_row_close_price and last_second_row_diff_price > 0 and last_row_diff_price > 0:
+    difference_price = last_row_close_price - last_second_row_close_price
+    fee_rate = 0.0004   # 수수료율 (0.04%)
+
+    # 수수료 계산 (매도 수수료와 매수 수수료를 합산)
+    sell_fee = last_row_close_price * fee_rate
+    buy_fee = last_second_row_close_price * fee_rate
+    total_fee = round(sell_fee + buy_fee)
+
+    # 50100 - 50000 = 100 fee 20
+    print(f"volatility_rate: {last_second_row_volatility_rate}, buy_price: {last_second_row_close_price}, sell_price: {last_row_close_price}, total_fee: {total_fee}")
+    if last_second_row_volatility_rate > 0.05 and last_second_row_close_price < last_row_close_price and last_second_row_diff_price > 0 and last_row_diff_price > 0 and difference_price > total_fee:
         column_names = ['candle_date_time_utc', 'diff_1', 'open', 'low', 'high', 'close', 'volatility', 'volatility_rate', 'buy_signal']
 
         #buy_signal = df.iloc[-1, -1]

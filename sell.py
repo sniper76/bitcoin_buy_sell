@@ -8,6 +8,7 @@ load_dotenv ()
 import python_bithumb
 from order_chance import get_balance_and_locked_and_fee
 from price_util import cutting_unit_price
+from log_appendar import PrintLogger
 
 access_key = os.getenv("BITHUMB_ACCESS_KEY")
 secret_key = os.getenv("BITHUMB_SECRET_KEY")
@@ -28,13 +29,13 @@ def sell_btc(current_price=int, quantity=float):
             #sell_price = float(current_price + (current_price * 0.0002))
             final_sell_price = cutting_unit_price(1000, current_price)
         
-            print(f"매도 가격: {current_price} {final_sell_price}, {quantity}")
+            PrintLogger.info_method(f"매도 가격: {current_price} {final_sell_price}, {quantity}")
 
             order_info = bithumb.sell_limit_order("KRW-BTC", final_sell_price, quantity)
 
             # 로그 파일 설정
-            with open("/Users/sniper76/VScodeProjects/result.txt", 'a') as the_file:
-                the_file.write(f"매도 주문 생성: {order_info}\n")
+            #with open("/Users/sniper76/VScodeProjects/result.txt", 'a') as the_file:
+            #    the_file.write(f"매도 주문 생성: {order_info}\n")
 
             return order_info
 

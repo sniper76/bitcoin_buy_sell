@@ -1,0 +1,8 @@
+2025/01/16 12:11:19 PM INFO:in BarChartData: volatility_rate: 0.18, buy_price: 146761000.0, sell_price: 146777000.0, total_fee: 117415
+2025/01/16 12:17:53 PM INFO:in BarChartData: volatility_rate: 0.11, buy_price: 146736000.0, sell_price: 146704000.0, total_fee: 117376
+2025/01/16 12:21:16 PM INFO:in BarChartData: volatility_rate: 0.19, buy_price: 146518000.0, sell_price: 146540000.0, total_fee: 117223
+2025/01/16 01:00:56 PM INFO:in volatility_rate_main.py: 매수 배치 작업 시작
+2025/01/16 01:00:56 PM INFO:in BarChartData: volatility_rate: 0.07, buy_price: 146262000.0, sell_price: 146240000.0, total_fee: 117001
+2025/01/16 01:02:26 PM INFO:in BarChartData: volatility_rate: 0.07, buy_price: 146262000.0, sell_price: 146291000.0, total_fee: 117021
+2025/01/16 01:03:57 PM INFO:in BarChartData: volatility_rate: 0.09, buy_price: 146317000.0, sell_price: 146349000.0, total_fee: 117066
+2025/01/16 01:05:27 PM INFO:in BarChartData: volatility_rate: 0.09, buy_price: 146317000.0, sell_price: 146377000.0, total_fee: 117078
