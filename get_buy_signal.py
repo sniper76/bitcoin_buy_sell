@@ -39,7 +39,7 @@ class BuySignalData:
 
     def get_price_five_consecutive_risesed(self, data):
         """
-        분봉 5연속 상승시 현재 봉의 시가open 으로 매수하고 0.5% 더해서 매도
+        분봉 5연속 상승시 현재 봉의 시가open 으로 매수하고 0.3% 더해서 매도
         """
         data["volatility"] = data["close"] - data["open"]
         
@@ -50,7 +50,7 @@ class BuySignalData:
         last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 1])
 
         buy_price = float(data["open"].iloc[self.DF_LENGTH - 1])
-        sell_price = buy_price + round(buy_price * 0.005)
+        sell_price = buy_price + round(buy_price * 0.003)
 
         self.example_logger.debug_method(data[["open", "low", "high", "close", "volatility"]])
         self.example_logger.info_method(f"buy_price: {buy_price}, sell_price: {sell_price}")
@@ -75,7 +75,7 @@ class BuySignalData:
 
     def get_price_five_consecutive_declinesed(self, data):
         """
-        분봉 5연속 하락시 현재 봉의 시가open 으로 매수하고 0.5% 더해서 매도
+        분봉 5연속 하락시 현재 봉의 시가open 으로 매수하고 0.3% 더해서 매도
         """
         data["volatility"] = data["close"] - data["open"]
         
@@ -86,7 +86,7 @@ class BuySignalData:
         last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 1])
 
         buy_price = float(data["open"].iloc[self.DF_LENGTH - 1])
-        sell_price = buy_price + round(buy_price * 0.005)
+        sell_price = buy_price + round(buy_price * 0.003)
 
         self.example_logger.debug_method(data[["open", "low", "high", "close", "volatility"]])
         self.example_logger.info_method(f"buy_price: {buy_price}, sell_price: {sell_price}")
