@@ -7,12 +7,14 @@ import requests
 load_dotenv ()
 import pyupbit
 from upbit.order_chance import get_balance_and_locked_and_fee
+from upbit.log_appendar import PrintLogger
 
 
 upbit = pyupbit.Upbit(os.getenv("UPBIT_ACCESS_KEY"), os.getenv("UPBIT_SECRET_KEY"))
 
 def sell_btc(current_price=int, quantity=float):
     # Simulate a sell operation
+    loggerObj = PrintLogger("Upbit")
     try:
         # 잔액과 수수료 가져오기
         response = get_balance_and_locked_and_fee()
@@ -25,7 +27,7 @@ def sell_btc(current_price=int, quantity=float):
             return order_info
 
     except requests.exceptions.HTTPError as e:
-        obj.debug_method(e.response.text)  # 에러 응답 내용 확인
+        loggerObj.debug_method(e.response.text)  # 에러 응답 내용 확인
 
 # Example usage
 if __name__ == "__main__":

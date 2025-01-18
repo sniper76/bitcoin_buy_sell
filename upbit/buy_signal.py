@@ -18,7 +18,6 @@ class BuySignalData:
         data["c_prev_row_close_price"] = data["close"].diff()
         
         # 변동폭 계산
-        #df["volatility"] = df["high"] - df["low"]
         data["volatility"] = data["close"] - data["open"]
 
         # 변동 비율 계산
@@ -40,6 +39,8 @@ class BuySignalData:
         buy_fee = second_to_last_row_close_price * yield_rate
         total_fee = round(sell_fee + buy_fee)
         
+        #"volume" 거래량
+        #self.loggerObj.debug_method(f"data: {data}")
         self.loggerObj.debug_method(f"second_to_last_row_close_price: {second_to_last_row_close_price}, last_row_close_price: {last_row_close_price}, total_fee: {total_fee}")
         self.loggerObj.debug_method(f"second_to_last_row_diff_price: {second_to_last_row_diff_price}, last_row_diff_price: {last_row_diff_price}")
         """
