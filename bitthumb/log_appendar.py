@@ -7,13 +7,13 @@ logger.setLevel(logging.DEBUG)  # Set base level to DEBUG to capture all logs
 
 # Create handlers for info and debug logs
 info_handler = TimedRotatingFileHandler(
-    "logs/upbit_info.log", when="midnight", interval=1, backupCount=7, encoding="utf-8"
+    "logs/bitthumb_info.log", when="midnight", interval=1, backupCount=7, encoding="utf-8"
 )
 #info_handler = logging.FileHandler("logs/info.log")
 info_handler.setLevel(logging.INFO)  # Logs INFO and above
 
 debug_handler = TimedRotatingFileHandler(
-    "logs/upbit_debug.log", when="midnight", interval=1, backupCount=7, encoding="utf-8"
+    "logs/bitthumb_debug.log", when="midnight", interval=1, backupCount=7, encoding="utf-8"
 )
 #debug_handler = logging.FileHandler("logs/debug.log")
 debug_handler.setLevel(logging.DEBUG)  # Logs DEBUG and above

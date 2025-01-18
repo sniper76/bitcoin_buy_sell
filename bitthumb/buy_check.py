@@ -1,9 +1,9 @@
 import time
 import json
 import requests
-from .order_check import get_order  # Assuming this function exists in api.py
-from .order_cancel import cancel_order
-from upbit.log_appendar import PrintLogger
+from bitthumb.order_check import get_order  # Assuming this function exists in api.py
+from bitthumb.order_cancel import cancel_order
+from bitthumb.log_appendar import PrintLogger
 
 def buy_state_check(uuid):
     obj = PrintLogger("BitTb")

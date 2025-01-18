@@ -4,7 +4,7 @@ load_dotenv ()
 import python_bithumb
 import json
 import requests
-from upbit.log_appendar import PrintLogger
+from bitthumb.log_appendar import PrintLogger
 
 access_key = os.getenv("BITHUMB_ACCESS_KEY")
 secret_key = os.getenv("BITHUMB_SECRET_KEY")

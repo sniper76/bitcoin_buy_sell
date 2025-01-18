@@ -1,9 +1,9 @@
 import time
 import json
 import requests
-from .order_check import get_order  # Assuming this function exists in api.py
-from .order_cancel import cancel_order
-from .log_appendar import PrintLogger
+from upbit.order_check import get_order  # Assuming this function exists in api.py
+from upbit.order_cancel import cancel_order
+from upbit.log_appendar import PrintLogger
 
 def buy_state_check(uuid):
     #상태 주기적 조회

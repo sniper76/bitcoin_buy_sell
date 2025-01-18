@@ -3,7 +3,7 @@ import os
 import pyupbit
 from dotenv import load_dotenv
 load_dotenv ()
-from .log_appendar import PrintLogger
+from upbit.log_appendar import PrintLogger
 
 
 class BarChartData:

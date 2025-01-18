@@ -1,7 +1,7 @@
 import python_bithumb
 import logging
 import pandas as pd
-from .log_appendar import PrintLogger
+from upbit.log_appendar import PrintLogger
 
 class BuySignalData:
     DF_LENGTH = 10

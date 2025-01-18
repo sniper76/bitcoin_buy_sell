@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 import requests
 load_dotenv ()
 import pyupbit
-from .order_chance import get_balance_and_locked_and_fee
+from upbit.order_chance import get_balance_and_locked_and_fee
 
 
 upbit = pyupbit.Upbit(os.getenv("UPBIT_ACCESS_KEY"), os.getenv("UPBIT_SECRET_KEY"))

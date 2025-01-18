@@ -1,6 +1,6 @@
 import python_bithumb
 import logging
-from upbit.log_appendar import PrintLogger
+from bitthumb.log_appendar import PrintLogger
 
 class BarChartData:
     DF_LENGTH = 10

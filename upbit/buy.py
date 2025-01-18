@@ -6,8 +6,8 @@ from datetime import datetime
 import json
 import requests
 import pyupbit
-from .buy_check import buy_state_check
-from .log_appendar import PrintLogger
+from upbit.buy_check import buy_state_check
+from upbit.log_appendar import PrintLogger
 
 
 upbit = pyupbit.Upbit(os.getenv("UPBIT_ACCESS_KEY"), os.getenv("UPBIT_SECRET_KEY"))

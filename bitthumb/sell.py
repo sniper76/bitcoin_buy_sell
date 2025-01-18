@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 import requests
 load_dotenv ()
 import python_bithumb
-from .order_chance import get_balance_and_locked_and_fee
-from upbit.log_appendar import PrintLogger
+from bitthumb.order_chance import get_balance_and_locked_and_fee
+from bitthumb.log_appendar import PrintLogger
 
 access_key = os.getenv("BITHUMB_ACCESS_KEY")
 secret_key = os.getenv("BITHUMB_SECRET_KEY")
