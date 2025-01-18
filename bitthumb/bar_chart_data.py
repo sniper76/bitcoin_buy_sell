@@ -7,7 +7,7 @@ class BarChartData:
     
     def __init__(self):
         # Use PrintLogger for logging
-        self.example_logger = PrintLogger()
+        self.example_logger = PrintLogger("BitTb")
 
     def get_price_minute3(self):
         # 1. 빗썸 차트 데이터 가져오기 (3분봉)

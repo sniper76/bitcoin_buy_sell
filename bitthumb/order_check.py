@@ -13,7 +13,7 @@ bithumb = python_bithumb.Bithumb(access_key, secret_key)
 
 # order_check.py
 def get_order(uuid:str):
-    obj = PrintLogger()
+    obj = PrintLogger("BitTb")
     try:
         obj.debug_method(f"개별 주문 조회: {uuid}")
         # 개별 주문 조회 (UUID 필요)

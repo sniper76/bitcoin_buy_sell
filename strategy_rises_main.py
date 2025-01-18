@@ -3,17 +3,17 @@ import time
 import json
 import python_bithumb
 from datetime import datetime
-from order_chance import get_balance_and_locked_and_fee
-from buy import buy_btc
-from sell import sell_btc
-from sell_market_price import sell_market_btc
-from buy_market_price import buy_market_btc
+from bitthumb.order_chance import get_balance_and_locked_and_fee
+from bitthumb.buy import buy_btc
+from bitthumb.sell import sell_btc
+from bitthumb.sell_market_price import sell_market_btc
+from bitthumb.buy_market_price import buy_market_btc
 from price_util import cutting_unit_price
-from bar_chart_data import BarChartData
+from bitthumb.bar_chart_data import BarChartData
 from upbit.log_appendar import PrintLogger
-from get_buy_signal import BuySignalData
-from order_cancel import cancel_order
-from order_check import get_order
+from bitthumb.get_buy_signal import BuySignalData
+from bitthumb.order_cancel import cancel_order
+from bitthumb.order_check import get_order
 
 def main():
     try:
@@ -21,7 +21,7 @@ def main():
         배치 작업: 0시 0분 0초부터 6시 0분 0초까지 실행
         3분봉 5연속 상승시 매수하고 0.5% 더해서 매도
         """
-        obj = PrintLogger()
+        obj = PrintLogger("BitTb")
         barChart = BarChartData()
         buySingal = BuySignalData()
         obj.info_method("rises매수 배치 작업 시작")
@@ -52,6 +52,7 @@ def main():
                 buy_price = float(buy_signal_data["buy_price"])
                 sell_price = float(buy_signal_data["sell_price"])
                 buy_price = cutting_unit_price(1000, buy_price)
+                sell_price = cutting_unit_price(1000, sell_price)
 
                 # 수량 계산
                 quantity = round(total_balance / buy_price, 7)

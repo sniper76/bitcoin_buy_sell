@@ -8,7 +8,7 @@ class BuySignalData:
     
     def __init__(self):
         # Use PrintLogger for logging
-        self.example_logger = PrintLogger()
+        self.example_logger = PrintLogger("BitTb")
 
     def get_price_preview_row_rises_jumping(self, data):
         """

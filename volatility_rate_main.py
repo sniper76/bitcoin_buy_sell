@@ -3,15 +3,15 @@ import time
 import json
 import python_bithumb
 from datetime import datetime
-from order_chance import get_balance_and_locked_and_fee
-from buy import buy_btc
-from sell import sell_btc
-from sell_market_price import sell_market_btc
-from buy_market_price import buy_market_btc
+from bitthumb.order_chance import get_balance_and_locked_and_fee
+from bitthumb.buy import buy_btc
+from bitthumb.sell import sell_btc
+from bitthumb.sell_market_price import sell_market_btc
+from bitthumb.buy_market_price import buy_market_btc
 from price_util import cutting_unit_price
-from bar_chart_data import BarChartData
+from bitthumb.bar_chart_data import BarChartData
 from upbit.log_appendar import PrintLogger
-from get_buy_signal import BuySignalData
+from bitthumb.get_buy_signal import BuySignalData
 
 def main():
     try:
@@ -21,7 +21,7 @@ def main():
         volatility_rate 변동비율
         바로 직전 1분봉의 변동비율이 0.05 보다 클때 종가로 매수한다.
         """
-        obj = PrintLogger()
+        obj = PrintLogger("BitTb")
         barChart = BarChartData()
         buySingal = BuySignalData()
         obj.info_method("매수 배치 작업 시작")
@@ -50,6 +50,7 @@ def main():
                 buy_price = float(buy_signal_data["buy_price"])
                 sell_price = float(buy_signal_data["sell_price"])
                 buy_price = cutting_unit_price(1000, buy_price)
+                sell_price = cutting_unit_price(1000, sell_price)
 
                 # 수량 계산
                 quantity = round(total_balance / buy_price, 7)
