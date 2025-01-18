@@ -14,7 +14,7 @@ class BarChartData:
     def get_price_minute3(self):
         # 1. 빗썸 차트 데이터 가져오기 (3분봉)
         df = pyupbit.get_ohlcv("KRW-BTC", interval="minute3", count=10)
-        self.loggerObj.debug_method(df[["open", "high", "close", "volumn", "value"]])
+        self.loggerObj.debug_method(df[["open", "low", "high", "close", "volume"]])
         return df
 
 # Example usage
