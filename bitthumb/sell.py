@@ -8,7 +8,7 @@ load_dotenv ()
 import python_bithumb
 from order_chance import get_balance_and_locked_and_fee
 from price_util import cutting_unit_price
-from log_appendar import PrintLogger
+from upbit.log_appendar import PrintLogger
 
 access_key = os.getenv("BITHUMB_ACCESS_KEY")
 secret_key = os.getenv("BITHUMB_SECRET_KEY")

@@ -10,7 +10,7 @@ from sell_market_price import sell_market_btc
 from buy_market_price import buy_market_btc
 from price_util import cutting_unit_price
 from bar_chart_data import BarChartData
-from log_appendar import PrintLogger
+from upbit.log_appendar import PrintLogger
 from get_buy_signal import BuySignalData
 
 def main():
