@@ -35,16 +35,18 @@ def main():
             response = get_balance_and_locked_and_fee()
             data = json.loads(response)  # JSON 문자열을 딕셔너리로 변환
 
+            yield_rate = 0.0004   # 수익율 (0.04%)
+
             bar_char_data = barChart.get_price_minute3()
-            buy_signal_data = buySingal.get_price_difference_volatility_calculate_with_fee(bar_char_data)
+            buy_signal_data = buySingal.get_price_difference_volatility_calculate_with_fee(bar_char_data, yield_rate)
 
             if data["bid_balance"] > 9990 and data["bid_locked"] == 0 and data["ask_balance"] == 0 and data["ask_locked"] == 0 and buy_signal_data["buy_signal"]:
                 obj.info_method("매수 프로세스 시작!!")
 
-                # 매수가 계산: 잔액 - (잔액 * 수수료)
+                # 매수가 계산: 잔액 - (잔액 * 수수료 *)
                 balance = data["bid_balance"]
                 fee_rate = data["bid_fee_rate"]
-                total_balance = balance - (balance * fee_rate)
+                total_balance = balance - (balance * fee_rate * 2)
 
                 buy_price = float(buy_signal_data["buy_price"])
                 sell_price = float(buy_signal_data["sell_price"])

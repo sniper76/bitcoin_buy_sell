@@ -24,7 +24,7 @@ def main():
         obj = PrintLogger()
         barChart = BarChartData()
         buySingal = BuySignalData()
-        obj.info_method("S1매수 배치 작업 시작")
+        obj.info_method("rises매수 배치 작업 시작")
         start_time = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         end_time = start_time.replace(hour=7)
         last_sell_order_uuid = None
@@ -42,7 +42,7 @@ def main():
             buy_signal_data = buySingal.get_price_five_consecutive_risesed(bar_char_data)
 
             if data["bid_balance"] > 9990 and data["bid_locked"] == 0 and data["ask_balance"] == 0 and data["ask_locked"] == 0 and buy_signal_data["buy_signal"]:
-                obj.info_method("S1매수 프로세스 시작!!")
+                obj.info_method("rises매수 프로세스 시작!!")
 
                 # 매수가 계산: 잔액 - (수수료 * 2)
                 balance = data["bid_balance"]
@@ -56,7 +56,7 @@ def main():
                 # 수량 계산
                 quantity = round(total_balance / buy_price, 7)
                 buy_result = buy_btc(buy_price, quantity)
-                obj.info_method(f"S1buy_price: {buy_price}, quantity: {quantity}, sell_price: {sell_price}")
+                obj.info_method(f"rises buy_price: {buy_price}, quantity: {quantity}, sell_price: {sell_price}")
 
                 if buy_result["is_completed"]:
                     sell_result = sell_btc(sell_price, quantity)
@@ -70,7 +70,7 @@ def main():
             final_result = get_order(last_sell_order_uuid)
             if final_result["state"] != 'done' and final_result["remaining_volume"] > 0:
                 cancel_order(last_sell_order_uuid)
-        obj.info_method("S1매수 배치 작업 종료")
+        obj.info_method("rises매수 배치 작업 종료")
     except KeyboardInterrupt:
         print("프로그램이 종료되었습니다.")
 
