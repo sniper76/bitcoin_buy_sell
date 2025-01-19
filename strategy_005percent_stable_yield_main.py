@@ -29,10 +29,11 @@ def main():
             data = json.loads(response)  # JSON 문자열을 딕셔너리로 변환
             #loggerObj.debug_method(f"balance: {data}")
 
-            yield_rate = 0.0005   # 수익율 (0.05%)
+            yield_rate = 0.0004   # 수익율 (0.04%)
 
             bar_char_data = barChart.get_price_minute3()
             buy_signal_data = buySingal.get_price_difference_volatility_calculate_with_fee(bar_char_data, yield_rate)
+            loggerObj.debug_method(f"signal: {buy_signal_data}")
 
             if data["bid_balance"] > 9990 and data["bid_locked"] == 0 and data["ask_balance"] == 0 and data["ask_locked"] == 0 and buy_signal_data["buy_signal"]:
                 loggerObj.info_method("매수 프로세스 시작!!")
@@ -49,7 +50,7 @@ def main():
                 sell_price = cutting_unit_price(1000, sell_price)
 
                 # 수량 계산
-                quantity = round(total_balance / buy_price, 7)
+                quantity = round(total_balance / buy_price, 8)
                 buy_result = buy_btc(buy_price, quantity)
                 loggerObj.info_method(f"balance: {balance}, fee_rate: {fee_rate}, total_balance: {total_balance}")
                 loggerObj.info_method(f"buy_price: {buy_price}, quantity: {quantity}, sell_price: {sell_price}")

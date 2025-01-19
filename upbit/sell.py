@@ -22,6 +22,7 @@ def sell_btc(current_price=int, quantity=float):
 
         # 매도 잔고가 있고 매도 주문이 없으면서 매수 주문도 없는 상태만 매도 한다.
         if data["ask_balance"] > 0 and data["ask_locked"] == 0 and data["bid_locked"] == 0:
+            loggerObj.info_method(f"매도 가격: {current_price} {quantity}")
             order_info = upbit.sell_limit_order("KRW-BTC", current_price, quantity)
 
             return order_info

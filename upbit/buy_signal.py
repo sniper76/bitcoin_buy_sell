@@ -40,9 +40,12 @@ class BuySignalData:
         total_fee = round(sell_fee + buy_fee)
         
         #"volume" 거래량
-        #self.loggerObj.debug_method(f"data: {data}")
-        self.loggerObj.debug_method(f"second_to_last_row_close_price: {second_to_last_row_close_price}, last_row_close_price: {last_row_close_price}, total_fee: {total_fee}")
-        self.loggerObj.debug_method(f"second_to_last_row_diff_price: {second_to_last_row_diff_price}, last_row_diff_price: {last_row_diff_price}")
+        #self.loggerObj.debug_method(data[["open", "close", "volatility", "volatility_rate"]])
+        self.loggerObj.debug_method(f"second_to_last_row_volatility_rate: {second_to_last_row_volatility_rate}")
+        self.loggerObj.debug_method(f"second_to_last_row_close_price: {second_to_last_row_close_price}")
+        self.loggerObj.debug_method(f"last_row_close_price: {last_row_close_price}, total_fee: {total_fee}")
+        self.loggerObj.debug_method(f"second_to_last_row_diff_price: {second_to_last_row_diff_price}")
+        self.loggerObj.debug_method(f"last_row_diff_price: {last_row_diff_price}")
         """
         바로 이전 변동율이 0.08 보다 크고
         현재 row 보다 바로 이전 row 의 종가가 작고

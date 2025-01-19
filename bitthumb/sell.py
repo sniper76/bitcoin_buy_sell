@@ -28,7 +28,7 @@ def sell_btc(current_price=int, quantity=float):
             # 매도가 현재가 * 0.01 is 1%
             #sell_price = float(current_price + (current_price * 0.0002))
         
-            obj.info_method(f"매도 가격: {current_price} {current_price}, {quantity}")
+            obj.info_method(f"매도 가격: {current_price} {quantity}")
 
             order_info = bithumb.sell_limit_order("KRW-BTC", current_price, quantity)
 

@@ -25,11 +25,12 @@ def main():
         barChart = BarChartData()
         buySingal = BuySignalData()
         obj.info_method("declines매수 배치 작업 시작")
-        now_time = datetime.now().time()
         last_sell_order_uuid = None
 
         while True:
-            if time(6, 0, 0) <= now_time or now_time <= time(20, 0, 0):
+            now_time = datetime.now().time()
+            obj.info_method(f"declines now_time {now_time}")
+            if time(6, 0, 0) < now_time or now_time > time(20, 0, 0):
                 # 잔액과 수수료 가져오기
                 response = get_balance_and_locked_and_fee()
                 data = json.loads(response)  # JSON 문자열을 딕셔너리로 변환
@@ -51,22 +52,26 @@ def main():
                     sell_price = cutting_unit_price(1000, sell_price)
 
                     # 수량 계산
-                    quantity = round(total_balance / buy_price, 7)
+                    quantity = round(total_balance / buy_price, 8)
                     buy_result = buy_btc(buy_price, quantity)
-                    obj.info_method(f"rises buy_price: {buy_price}, quantity: {quantity}, sell_price: {sell_price}")
+                    obj.info_method(f"declines buy_price: {buy_price}, quantity: {quantity}, sell_price: {sell_price}")
 
                     if buy_result["is_completed"]:
                         sell_result = sell_btc(sell_price, quantity)
                         last_sell_order_uuid = sell_result["uuid"]
+            else:
+                obj.info_method("declines stand by")
+                if last_sell_order_uuid is not None:
+                    obj.info_method("마지막 주문 취소")
+                    final_result = get_order(last_sell_order_uuid)
+                    if final_result["state"] != 'done' and final_result["remaining_volume"] > 0:
+                        cancel_order(last_sell_order_uuid)
+                        last_sell_order_uuid = None
 
             # 60초 대기
             t.sleep(60)
 
 
-        if last_sell_order_uuid is not None:
-            final_result = get_order(last_sell_order_uuid)
-            if final_result["state"] != 'done' and final_result["remaining_volume"] > 0:
-                cancel_order(last_sell_order_uuid)
         obj.info_method("declines매수 배치 작업 종료")
     except KeyboardInterrupt:
         print("프로그램이 종료되었습니다.")
