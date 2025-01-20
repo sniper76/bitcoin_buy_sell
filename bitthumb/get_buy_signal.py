@@ -10,33 +10,6 @@ class BuySignalData:
         # Use PrintLogger for logging
         self.example_logger = PrintLogger("BitTb")
 
-    def get_price_preview_row_rises_jumping(self, data):
-        """
-        이전 종가 보다 현재 시가가 점프하면 매수
-        """
-        data["volatility"] = data["close"] - data["open"]
-        
-        second_to_last_close_price = float(data["close"].iloc[self.DF_LENGTH - 2])
-        last_row_open_price = float(data["open"].iloc[self.DF_LENGTH - 1])
-
-        buy_price = float(data["open"].iloc[self.DF_LENGTH - 1])
-        sell_price = buy_price + round(buy_price * 0.005)
-
-        self.example_logger.debug_method(data[["open", "low", "high", "close", "volatility"]])
-        self.example_logger.info_method(f"buy_price: {buy_price}, sell_price: {sell_price}")
-        if second_to_last_close_price < last_row_open_price > 0:
-            result = {
-                "buy_signal": True,
-                "buy_price": buy_price,
-                "sell_price": sell_price
-            }
-            return result
-
-        result = {
-            "buy_signal": False
-        }
-        return result
-
     def get_price_five_consecutive_risesed(self, data):
         """
         분봉 5연속 상승시 현재 봉의 시가open 으로 매수하고 0.3% 더해서 매도

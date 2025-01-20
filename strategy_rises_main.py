@@ -30,7 +30,7 @@ def main():
         while True:
             now_time = datetime.now().time()
             obj.info_method(f"rises now_time {now_time}")
-            if time(20, 0, 0) > now_time or now_time < time(6, 0, 0):
+            if time(20, 0, 0) < now_time or now_time < time(6, 0, 0):
                 # 잔액과 수수료 가져오기
                 response = get_balance_and_locked_and_fee()
                 data = json.loads(response)  # JSON 문자열을 딕셔너리로 변환
@@ -59,12 +59,14 @@ def main():
                     if buy_result["is_completed"]:
                         sell_result = sell_btc(sell_price, quantity)
                         last_sell_order_uuid = sell_result["uuid"]
+                        obj.info_method(f"rises 매도 주문 uuid: {last_sell_order_uuid}")
             else:
                 obj.info_method("rises stand by")
                 if last_sell_order_uuid is not None:
                     obj.info_method("마지막 주문 취소")
                     final_result = get_order(last_sell_order_uuid)
-                    if final_result["state"] != 'done' and final_result["remaining_volume"] > 0:
+                    if final_result["remaining_volume"] > 0:
+                        obj.info_method(f"rises final_result: {final_result}")
                         cancel_order(last_sell_order_uuid)
                         last_sell_order_uuid = None
 
