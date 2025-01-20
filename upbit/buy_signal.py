@@ -11,7 +11,7 @@ class BuySignalData:
 
     def get_price_preview_row_rises_jumping(self, data):
         """
-        이전 종가 보다 현재 시가가 점프하면 매수
+        이전 종가 보다 현재 시가가 점프하면 매수하고 0.2% 더해서 매도
         """
         data["volatility"] = data["close"] - data["open"]
 

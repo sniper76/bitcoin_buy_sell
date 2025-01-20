@@ -12,7 +12,7 @@ def buy_state_check(uuid):
         loop = 0
         while True:
             loop += 1
-            obj.info_method(f"Checking status...{loop}")
+            obj.debug_method(f"Checking status...{loop}")
             result = get_order(uuid)
 
             #print(result)
