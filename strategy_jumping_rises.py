@@ -9,7 +9,7 @@ from upbit.bar_chart_data import BarChartData
 from upbit.log_appendar import PrintLogger
 from upbit.buy_signal import BuySignalData
 from upbit.order_cancel import cancel_order
-from upbit.order_check import get_order
+from upbit.get_order_check import get_order
 
 def main():
     try:
@@ -44,11 +44,11 @@ def main():
 
                 # 수량 계산
                 quantity = round(total_balance / buy_price, 8)
-                buy_result = buy_btc(buy_price, quantity)
+                buy_result = buy_btc(buy_price, quantity, 10)
                 obj.info_method(f"jumping buy_price: {buy_price}, quantity: {quantity}, sell_price: {sell_price}")
 
                 if buy_result["is_completed"]:
-                    sell_result = sell_btc(sell_price, quantity)
+                    sell_result = sell_btc(sell_price, quantity, 10)
                     last_sell_order_uuid = sell_result["uuid"]
                     obj.info_method(f"jumping 매도 주문 uuid: {last_sell_order_uuid}")
 

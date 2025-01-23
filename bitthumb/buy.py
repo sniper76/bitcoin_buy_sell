@@ -6,7 +6,7 @@ from datetime import datetime
 import json
 import requests
 import python_bithumb
-from bitthumb.buy_check import buy_state_check
+from bitthumb.order_check import order_state_check
 from bitthumb.log_appendar import PrintLogger
 
 access_key = os.getenv("BITHUMB_ACCESS_KEY")
@@ -29,11 +29,11 @@ def buy_btc(price=int, quantity=float):
         #    the_file.write(f"매수 주문 생성: {order_info}\n")
 
         # Check if the buy is completed
-        result = buy_state_check(buy_uuid)
+        result = order_state_check(buy_uuid, "매수")
         
         data = {
             "is_completed": result["is_completed"],
-            "buy_price": result["buy_price"]
+            "buy_price": result["price"]
         }
         return data
     except requests.exceptions.HTTPError as e:

@@ -8,11 +8,12 @@ load_dotenv ()
 import pyupbit
 from upbit.order_chance import get_balance_and_locked_and_fee
 from upbit.log_appendar import PrintLogger
+from upbit.order_check import order_state_check
 
 
 upbit = pyupbit.Upbit(os.getenv("UPBIT_ACCESS_KEY"), os.getenv("UPBIT_SECRET_KEY"))
 
-def sell_btc(current_price=int, quantity=float):
+def sell_btc(current_price=int, quantity=float, sleepSecond=int):
     # Simulate a sell operation
     loggerObj = PrintLogger("Upbit")
     try:
@@ -24,6 +25,13 @@ def sell_btc(current_price=int, quantity=float):
         if data["ask_balance"] > 0 and data["ask_locked"] == 0 and data["bid_locked"] == 0:
             loggerObj.info_method(f"매도 가격: {current_price} {quantity}")
             order_info = upbit.sell_limit_order("KRW-BTC", current_price, quantity)
+
+            sell_uuid = order_info["uuid"]
+
+            #result = order_state_check(sell_uuid, "매도", sleepSecond)
+            #if result["is_completed"] == False:
+            #    market_result = upbit.sell_market_order("KRW-BTC", quantity)
+            #    loggerObj.info_method(f"시장가 매도: {market_result}")
 
             return order_info
 

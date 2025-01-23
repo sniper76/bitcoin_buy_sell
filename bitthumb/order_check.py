@@ -1,33 +1,40 @@
-import os
-from dotenv import load_dotenv
-load_dotenv ()
-import python_bithumb
+import time
 import json
 import requests
+from bitthumb.get_order_check import get_order  # Assuming this function exists in api.py
+from bitthumb.order_cancel import cancel_order
 from bitthumb.log_appendar import PrintLogger
 
-access_key = os.getenv("BITHUMB_ACCESS_KEY")
-secret_key = os.getenv("BITHUMB_SECRET_KEY")
-
-bithumb = python_bithumb.Bithumb(access_key, secret_key)
-
-# order_check.py
-def get_order(uuid:str):
+def order_state_check(uuid:str, typeText:str):
     obj = PrintLogger("BitTb")
     try:
-        obj.debug_method(f"개별 주문 조회: {uuid}")
-        # 개별 주문 조회 (UUID 필요)
-        order_detail = bithumb.get_order(uuid)
-        #print(order_detail)
-        data = {
-            "state": order_detail["state"],
-            "buy_price": float(order_detail["price"]),
-            "remaining_volume": float(order_detail["remaining_volume"])
-        }
-        return data
-    except requests.exceptions.HTTPError as e:
-        obj.debug_method(e.response.text)  # 에러 응답 내용 확인
+        #print(f"Checking order status for UUID: {uuid}")
+        loop = 0
+        while True:
+            loop += 1
+            obj.debug_method(f"Checking status...{loop}")
+            result = get_order(uuid)
 
+            #print(result)
+            if result["state"] == 'done' and result["remaining_volume"] == 0:  # Replace with actual API call
+                obj.info_method(f"{typeText} 성공: {uuid}, price: {result["price"]}")
+                data = {
+                    "is_completed": True,
+                    "price": float(result["price"])
+                }
+                return data
+            if loop == 10:
+                obj.info_method("10회 재시도 후 주문취소")
+                cancel_order(uuid)
+                data = {
+                    "is_completed": False,
+                    "buy_price": 0
+                }
+                return data
+            
+            time.sleep(10)
+    except requests.exceptions.HTTPError as e:
+        obj.info_method(e.response.text)  # 에러 응답 내용 확인
 # Example usage
 #if __name__ == "__main__":
-#    print(get_order('C0101000002070778601'))
+#    print(buy_state_check('C0101000002070778601'))

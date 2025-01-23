@@ -15,6 +15,10 @@ class BuySignalData:
         """
         data["volatility"] = data["close"] - data["open"]
 
+        second_to_last_row_close_price = float(data["close"].iloc[self.DF_LENGTH - 2])
+        last_row_open_price = float(data["open"].iloc[self.DF_LENGTH - 1])
+        difference_price = last_row_open_price - second_to_last_row_close_price
+
         second_to_last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 2])
         last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 1])
         
@@ -30,6 +34,7 @@ class BuySignalData:
             second_to_last_close_price < last_row_open_price
             and second_to_last_row_volatility_price > 0
             and last_row_volatility_price > 0
+            and difference_price > 10000
         ):
             result = {
                 "buy_signal": True,

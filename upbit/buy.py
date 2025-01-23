@@ -6,13 +6,13 @@ from datetime import datetime
 import json
 import requests
 import pyupbit
-from upbit.buy_check import buy_state_check
+from upbit.order_check import order_state_check
 from upbit.log_appendar import PrintLogger
 
 
 upbit = pyupbit.Upbit(os.getenv("UPBIT_ACCESS_KEY"), os.getenv("UPBIT_SECRET_KEY"))
 
-def buy_btc(price=int, quantity=float):
+def buy_btc(price=int, quantity=float, sleepSecond=int):
     # 지정가 매수 주문 (예: KRW-BTC를 139,000,000원에 0.0001 BTC 매수)
     loggerObj = PrintLogger("Upbit")
     try:
@@ -20,11 +20,11 @@ def buy_btc(price=int, quantity=float):
 
         buy_uuid = order_info["uuid"]
 
-        result = buy_state_check(buy_uuid)
+        result = order_state_check(buy_uuid, "매수", sleepSecond)
         
         data = {
             "is_completed": result["is_completed"],
-            "buy_price": result["buy_price"]
+            "buy_price": result["price"]
         }
         return data
     except requests.exceptions.HTTPError as e:
