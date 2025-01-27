@@ -28,7 +28,7 @@ def order_state_check(uuid:str, typeText:str):
                 cancel_order(uuid)
                 data = {
                     "is_completed": False,
-                    "buy_price": 0
+                    "price": 0
                 }
                 return data
             

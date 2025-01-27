@@ -32,8 +32,8 @@ class BuySignalData:
         self.loggerObj.info_method(f"buy_price: {buy_price}, sell_price: {sell_price}")
         if (
             second_to_last_close_price < last_row_open_price
-            and second_to_last_row_volatility_price > 0
-            and last_row_volatility_price > 0
+            and second_to_last_row_volatility_price > 10000
+            and last_row_volatility_price > 10000
             and difference_price > 10000
         ):
             result = {

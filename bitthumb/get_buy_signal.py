@@ -64,11 +64,11 @@ class BuySignalData:
         self.example_logger.debug_method(data[["open", "low", "high", "close", "volatility"]])
         self.example_logger.info_method(f"declines buy_price: {buy_price}, sell_price: {sell_price}")
         if (
-            fifth_to_last_row_volatility_price < 0
-            and fourth_to_last_row_volatility_price < 0
-            and third_to_last_row_volatility_price < 0
-            and second_to_last_row_volatility_price < 0
-            and last_row_volatility_price < 0
+            fifth_to_last_row_volatility_price < -10000
+            and fourth_to_last_row_volatility_price < -10000
+            and third_to_last_row_volatility_price < -10000
+            and second_to_last_row_volatility_price < -10000
+            and last_row_volatility_price < -10000
         ):
             result = {
                 "buy_signal": True,
