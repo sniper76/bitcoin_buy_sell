@@ -17,6 +17,14 @@ class BarChartData:
         # 1. 빗썸 차트 데이터 가져오기 (1분봉)
         return python_bithumb.get_ohlcv("KRW-BTC", interval="minute1", count=10)
 
+    def get_price_minute10(self):
+        # 1. 빗썸 차트 데이터 가져오기 (10분봉)
+        return python_bithumb.get_ohlcv("KRW-BTC", interval="minute10", count=10)
+
+    def get_price_day(self):
+        # 1. 빗썸 차트 데이터 가져오기 (일봉)
+        return python_bithumb.get_ohlcv("KRW-BTC", interval="day", count=10)
+
     def get_price_difference_volatility_calculate_with_fee_by_minute3(self):
         """
         고가와 저가의 차이로 변동율을 계산하다.volatility

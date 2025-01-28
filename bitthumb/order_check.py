@@ -5,7 +5,7 @@ from bitthumb.get_order_check import get_order  # Assuming this function exists 
 from bitthumb.order_cancel import cancel_order
 from bitthumb.log_appendar import PrintLogger
 
-def order_state_check(uuid:str, typeText:str):
+def order_state_check(uuid:str, typeText:str, loopCount:int):
     obj = PrintLogger("BitTb")
     try:
         #print(f"Checking order status for UUID: {uuid}")
@@ -23,7 +23,7 @@ def order_state_check(uuid:str, typeText:str):
                     "price": float(result["price"])
                 }
                 return data
-            if loop == 10:
+            if loop == loopCount:
                 obj.info_method("10회 재시도 후 주문취소")
                 cancel_order(uuid)
                 data = {

@@ -14,7 +14,7 @@ secret_key = os.getenv("BITHUMB_SECRET_KEY")
 
 bithumb = python_bithumb.Bithumb(access_key, secret_key)
 
-def buy_btc(price=int, quantity=float):
+def buy_btc(price:int, quantity:float, loopCount:int):
     # 지정가 매수 주문 (예: KRW-BTC를 139,000,000원에 0.0001 BTC 매수)
     try:
         obj = PrintLogger("BitTb")
@@ -29,7 +29,7 @@ def buy_btc(price=int, quantity=float):
         #    the_file.write(f"매수 주문 생성: {order_info}\n")
 
         # Check if the buy is completed
-        result = order_state_check(buy_uuid, "매수")
+        result = order_state_check(buy_uuid, "매수", loopCount)
         
         data = {
             "is_completed": result["is_completed"],

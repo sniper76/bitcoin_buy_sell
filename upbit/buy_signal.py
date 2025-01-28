@@ -25,16 +25,19 @@ class BuySignalData:
         second_to_last_close_price = float(data["close"].iloc[self.DF_LENGTH - 2])
         last_row_open_price = float(data["open"].iloc[self.DF_LENGTH - 1])
 
+        last_row_volume = float(data["volume"].iloc[self.DF_LENGTH - 1])
+
         buy_price = float(data["open"].iloc[self.DF_LENGTH - 1])
         sell_price = buy_price + round(buy_price * 0.002)
 
-        self.loggerObj.debug_method(data[["open", "high", "close", "volatility"]])
+        self.loggerObj.debug_method(data[["open", "close", "volatility", "volume"]])
         self.loggerObj.info_method(f"buy_price: {buy_price}, sell_price: {sell_price}")
         if (
             second_to_last_close_price < last_row_open_price
             and second_to_last_row_volatility_price > 10000
             and last_row_volatility_price > 10000
-            and difference_price > 10000
+            and difference_price > 30000
+            and last_row_volume > 0.7
         ):
             result = {
                 "buy_signal": True,

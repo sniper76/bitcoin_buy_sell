@@ -53,7 +53,7 @@ def main():
 
                 # 수량 계산
                 quantity = round(total_balance / buy_price, 8)
-                buy_result = buy_btc(buy_price, quantity)
+                buy_result = buy_btc(buy_price, quantity, 10)
                 obj.info_method(f"declines buy_price: {buy_price}, quantity: {quantity}, sell_price: {sell_price}")
 
                 if buy_result["is_completed"]:

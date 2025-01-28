@@ -28,11 +28,9 @@ class BuySignalData:
         self.example_logger.debug_method(data[["open", "low", "high", "close", "volatility"]])
         self.example_logger.info_method(f"rises buy_price: {buy_price}, sell_price: {sell_price}")
         if (
-            fifth_to_last_row_volatility_price > 0
-            and fourth_to_last_row_volatility_price > 0
-            and third_to_last_row_volatility_price > 0
-            and second_to_last_row_volatility_price > 0
-            and last_row_volatility_price > 0
+            third_to_last_row_volatility_price > 10000
+            and second_to_last_row_volatility_price > 10000
+            and last_row_volatility_price > 10000
         ):
             result = {
                 "buy_signal": True,
@@ -46,6 +44,47 @@ class BuySignalData:
         }
         return result
 
+    def get_price_day_bar_body_size(self, data):
+        """
+        현재봉과 바로직전봉이 양봉 시가 < 종가
+        현재봉 크기가 바로직전봉 크기 보다 커지는 순간 매수
+        0.2% 더해서 매도
+        """
+        # 봉의 크기 계산 (절대값 사용)
+        data["body_size"] = abs(data["close"] - data["open"])
+
+        # 이전 봉 크기와 비교
+        data["prev_body_size"] = data["body_size"].shift(1)
+        data["is_double_size"] = data["body_size"] >= 2 * data["prev_body_size"]
+
+        data["volatility"] = data["close"] - data["open"]
+        
+        second_to_last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 2])
+        last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 1])
+        last_row_is_double_size = float(data["is_double_size"].iloc[self.DF_LENGTH - 1])
+
+        buy_price = float(data["close"].iloc[self.DF_LENGTH - 1])
+        sell_price = buy_price + round(buy_price * 0.002)
+
+        self.example_logger.debug_method(data[["open", "close", "body_size", "is_double_size"]])
+        self.example_logger.info_method(f"buy_price: {buy_price}, sell_price: {sell_price}")
+        if (
+            second_to_last_row_volatility_price > 0
+            and last_row_volatility_price > 0
+            and last_row_is_double_size
+        ):
+            result = {
+                "buy_signal": True,
+                "buy_price": buy_price,
+                "sell_price": sell_price
+            }
+            return result
+
+        result = {
+            "buy_signal": False
+        }
+        return result
+    
     def get_price_five_consecutive_declinesed(self, data):
         """
         분봉 5연속 하락시 현재 봉의 시가open 으로 매수하고 0.2% 더해서 매도
