@@ -57,7 +57,7 @@ def main():
                     sell_result = sell_btc(sell_price, quantity)
                     #last_sell_order_uuid = sell_result["uuid"]
                     # Pause until the next day
-                    wait_until_next_day()
+                    #wait_until_next_day()
 
             time.sleep(60)  # Wait for 600 is 10 minutes
 
