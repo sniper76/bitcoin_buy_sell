@@ -10,6 +10,48 @@ class BuySignalData:
         # Use PrintLogger for logging
         self.example_logger = PrintLogger("BitTb")
 
+    def get_price_preview_row_rises_jumping(self, data):
+        """
+        이전 종가 보다 현재 시가가 점프하면 매수하고 0.2% 더해서 매도
+        """
+        data["volatility"] = data["close"] - data["open"]
+
+        second_to_last_close_price = float(data["close"].iloc[self.DF_LENGTH - 2])
+        last_row_open_price = float(data["open"].iloc[self.DF_LENGTH - 1])
+        last_row_close_price = float(data["close"].iloc[self.DF_LENGTH - 1])
+        open_close_difference_price = last_row_open_price - second_to_last_close_price
+        last_difference_price = last_row_close_price - last_row_open_price
+
+        second_to_last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 2])
+        last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 1])
+        
+        last_row_volume = float(data["volume"].iloc[self.DF_LENGTH - 1])
+
+        buy_price = float(data["open"].iloc[self.DF_LENGTH - 1])
+        sell_price = buy_price + round(buy_price * 0.002)
+
+        #self.example_logger.debug_method(data[["open", "close", "volatility", "volume"]])
+        self.example_logger.info_method(f"last_row_close_price: {last_row_close_price}, last_difference_price: {last_difference_price}, open_close_difference_price: {open_close_difference_price}, last_row_volume: {last_row_volume}")
+        if (
+            second_to_last_close_price < last_row_open_price
+            and second_to_last_row_volatility_price > 10000
+            and last_row_volatility_price > 10000
+            and open_close_difference_price > 20000
+            and last_difference_price > 10000
+            and last_row_volume > 0.7
+        ):
+            result = {
+                "buy_signal": True,
+                "buy_price": buy_price,
+                "sell_price": sell_price
+            }
+            return result
+
+        result = {
+            "buy_signal": False
+        }
+        return result
+
     def get_price_five_consecutive_risesed(self, data):
         """
         분봉 5연속 상승시 현재 봉의 시가open 으로 매수하고 0.2% 더해서 매도

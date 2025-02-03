@@ -55,6 +55,6 @@ class PrintLogger:
 
 # Example usage
 if __name__ == "__main__":
-    obj = PrintLogger("Upbit")
+    obj = PrintLogger("BitTb")
     obj.debug_method("This is a debug message.")
     obj.info_method("This is an info message.")

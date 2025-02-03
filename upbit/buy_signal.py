@@ -19,6 +19,7 @@ class BuySignalData:
         last_row_open_price = float(data["open"].iloc[self.DF_LENGTH - 1])
         last_row_close_price = float(data["close"].iloc[self.DF_LENGTH - 1])
         open_close_difference_price = last_row_open_price - second_to_last_close_price
+        last_difference_price = last_row_close_price - last_row_open_price
 
         second_to_last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 2])
         last_row_volatility_price = float(data["volatility"].iloc[self.DF_LENGTH - 1])
@@ -29,12 +30,13 @@ class BuySignalData:
         sell_price = buy_price + round(buy_price * 0.002)
 
         #self.loggerObj.debug_method(data[["open", "close", "volatility", "volume"]])
-        self.loggerObj.info_method(f"last_row_close_price: {last_row_close_price}, open_close_difference_price: {open_close_difference_price}, last_row_volume: {last_row_volume}")
+        self.loggerObj.info_method(f"last_difference_price: {last_difference_price}, open_close_difference_price: {open_close_difference_price}, last_row_volume: {last_row_volume}")
         if (
             second_to_last_close_price < last_row_open_price
             and second_to_last_row_volatility_price > 10000
             and last_row_volatility_price > 10000
             and open_close_difference_price > 20000
+            and last_difference_price > 10000
             and last_row_volume > 0.7
         ):
             result = {

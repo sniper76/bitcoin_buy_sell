@@ -11,7 +11,7 @@ from bitthumb.buy_market_price import buy_market_btc
 from price_util import cutting_unit_price
 from bitthumb.bar_chart_data import BarChartData
 from bitthumb.log_appendar import PrintLogger
-from bitthumb.get_buy_signal import BuySignalData
+from bitthumb.buy_signal import BuySignalData
 from bitthumb.order_cancel import cancel_order
 from bitthumb.get_order_check import get_order
 

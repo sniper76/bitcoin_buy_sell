@@ -1,22 +1,22 @@
 # main.py
 import time as t
 import json
-from upbit.order_chance import get_balance_and_locked_and_fee
-from upbit.buy import buy_btc
-from upbit.sell import sell_btc
+from bitthumb.order_chance import get_balance_and_locked_and_fee
+from bitthumb.buy import buy_btc
+from bitthumb.sell import sell_btc
 from price_util import cutting_unit_price
-from upbit.bar_chart_data import BarChartData
-from upbit.log_appendar import PrintLogger
-from upbit.buy_signal import BuySignalData
-from upbit.order_cancel import cancel_order
-from upbit.get_order_check import get_order
+from bitthumb.bar_chart_data import BarChartData
+from bitthumb.log_appendar import PrintLogger
+from bitthumb.buy_signal import BuySignalData
+from bitthumb.order_cancel import cancel_order
+from bitthumb.get_order_check import get_order
 
 def main():
     try:
         """
         3분봉 바로 직전 봉의 종가 보다 현재 봉의 시가가 큰 경우
         """
-        obj = PrintLogger("Upbit")
+        obj = PrintLogger("BitTb")
         barChart = BarChartData()
         buySingal = BuySignalData()
         obj.info_method("jumping매수 배치 작업 시작")
@@ -35,7 +35,7 @@ def main():
                 # 매수가 계산: 잔액 - (수수료 * 2)
                 balance = data["bid_balance"]
                 fee_rate = data["bid_fee_rate"]
-                total_balance = balance - (balance * fee_rate * 2)
+                total_balance = balance - (balance * (fee_rate + 0.0005))
 
                 buy_price = float(buy_signal_data["buy_price"])
                 sell_price = float(buy_signal_data["sell_price"])

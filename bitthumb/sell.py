@@ -8,13 +8,14 @@ load_dotenv ()
 import python_bithumb
 from bitthumb.order_chance import get_balance_and_locked_and_fee
 from bitthumb.log_appendar import PrintLogger
+from bitthumb.order_check import order_state_check
 
 access_key = os.getenv("BITHUMB_ACCESS_KEY")
 secret_key = os.getenv("BITHUMB_SECRET_KEY")
 
 bithumb = python_bithumb.Bithumb(access_key, secret_key)
 
-def sell_btc(current_price=int, quantity=float):
+def sell_btc(current_price=int, quantity=float, sleepSecond=int):
     obj = PrintLogger("BitTb")
     # Simulate a sell operation
     try:
@@ -32,9 +33,10 @@ def sell_btc(current_price=int, quantity=float):
 
             order_info = bithumb.sell_limit_order("KRW-BTC", current_price, quantity)
 
-            # 로그 파일 설정
-            #with open("/Users/sniper76/VScodeProjects/result.txt", 'a') as the_file:
-            #    the_file.write(f"매도 주문 생성: {order_info}\n")
+            #result = order_state_check(sell_uuid, "매도", sleepSecond)
+            #if result["is_completed"] == False:
+            #    market_result = upbit.sell_market_order("KRW-BTC", quantity)
+            #    loggerObj.info_method(f"시장가 매도: {market_result}")
 
             return order_info
 

@@ -4,7 +4,7 @@ import json
 from price_util import cutting_unit_price
 from bitthumb.order_chance import get_balance_and_locked_and_fee
 from bitthumb.bar_chart_data import BarChartData
-from bitthumb.get_buy_signal import BuySignalData
+from bitthumb.buy_signal import BuySignalData
 from bitthumb.log_appendar import PrintLogger
 from bitthumb.buy import buy_btc
 from bitthumb.sell import sell_btc

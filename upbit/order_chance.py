@@ -21,6 +21,7 @@ def get_balance_and_locked_and_fee():
 
         # 주문 가능 정보 조회 (주문 전 최소 거래금액, 수수료 등 확인)
         chance_info = upbit.get_chance("KRW-BTC")
+        #print(chance_info)
 
         data = {
             "bid_balance": float(chance_info["bid_account"]["balance"]),
