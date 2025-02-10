@@ -20,7 +20,7 @@ class BarChartData:
     def get_price_day(self):
         # 1. 업비트 차트 데이터 가져오기 (1일봉)
         df = pyupbit.get_ohlcv("KRW-BTC", interval="day", count=10)
-        self.loggerObj.debug_method(df[["open", "close", "volume", "value"]])
+        #self.loggerObj.debug_method(df[["open", "close", "volume", "value"]])
         return df
 
 # Example usage
